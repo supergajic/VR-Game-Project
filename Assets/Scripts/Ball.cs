@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour {
     private bool hasStarted = false;
     private Vector3 paddleToBallVector;
     private float countdown;
-    private float constantSpeed = 8f;
+    //private float constantSpeed = 8f;
 
 	// Use this for initialization
 	void Start () {
@@ -28,15 +28,15 @@ public class Ball : MonoBehaviour {
         {
             countdown = 5f;
             hasStarted = true;
-            this.GetComponent<Rigidbody2D>().velocity = constantSpeed * (this.GetComponent<Rigidbody2D>().velocity.normalized);
-            //this.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 10f); // 10f är för hastigheten.
+            //this.GetComponent<Rigidbody2D>().velocity = constantSpeed * (this.GetComponent<Rigidbody2D>().velocity.normalized);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 10f); // 10f är för hastigheten.
         }
 	}
 
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Vector2 tweak = new Vector2 (Random.Range(0f, 0.2f), Random.Range(0f, 0.2f));
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Vector2 tweak = new Vector2(Random.Range(0f, 0.2f), Random.Range(0f, 0.2f));
 
-    //    this.GetComponent<Rigidbody2D>().velocity += tweak;
-    //}
+        this.GetComponent<Rigidbody2D>().velocity += tweak;
+    }
 }
