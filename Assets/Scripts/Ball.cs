@@ -24,7 +24,8 @@ public class Ball : MonoBehaviour {
             countdown -= Time.deltaTime;
         }
 
-        if(countdown < 0)
+        //if(countdown < 0)
+        if(Input.GetButton("Fire1"))
         {
             countdown = 5f;
             hasStarted = true;
