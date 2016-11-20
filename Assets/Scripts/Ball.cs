@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
 
     public Paddle paddle;
     private bool hasStarted = false;
     private Vector3 paddleToBallVector;
-    private float countdown;
-    //private float constantSpeed = 8f;
 
 	// Use this for initialization
 	void Start () {
         paddleToBallVector = this.transform.position - paddle.transform.position;
-        countdown = 5f;
 	}
 	
 	// Update is called once per frame
@@ -21,16 +19,21 @@ public class Ball : MonoBehaviour {
         if (!hasStarted)
         {
             this.transform.position = paddle.transform.position + paddleToBallVector;
-            countdown -= Time.deltaTime;
+            if (Input.GetButton("Fire1"))
+            {
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 10f); // 10f är för hastigheten.
+                hasStarted = true;
+                //this.GetComponent<Rigidbody2D>().velocity = constantSpeed * (this.GetComponent<Rigidbody2D>().velocity.normalized);   
+            }
         }
 
-        //if(countdown < 0)
-        if(Input.GetButton("Fire1"))
+        if(hasStarted)
         {
-            countdown = 5f;
-            hasStarted = true;
-            //this.GetComponent<Rigidbody2D>().velocity = constantSpeed * (this.GetComponent<Rigidbody2D>().velocity.normalized);
-            this.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 10f); // 10f är för hastigheten.
+            if(Input.GetButton("Fire2"))
+            {
+                SceneManager.LoadScene("vr_prototype_alpha");
+            }
+            
         }
 	}
 
